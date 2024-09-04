@@ -1,0 +1,56 @@
+Documentation for the Python Script:
+
+This documentation provides a comprehensive overview of a Python script designed to ping multiple IP addresses and log the results. The script is useful for network diagnostics, allowing users to check the availability of a subnet network.
+
+Overview
+
+The script utilizes the ping command to determine the reachability of specified IP addresses. It supports both Windows and Unix-like operating systems by adapting the ping command syntax accordingly. The results of the ping operations are saved to a text file for later review.
+
+Libraries Required
+
+The script requires the following libraries:
+os: Provides a way to use operating system-dependent functionality.
+platform: Used to access the underlying platform’s identifying data.
+subprocess: Allows the script to spawn new processes, connect to their input/output/error pipes, and obtain their return codes.
+
+Function Definitions
+
+subnet_ping(ip_address, count=4)
+This function pings a specified IP address a given number of times and returns whether the ping was successful.
+Parameters:
+ip_address (str): The IP address to ping.
+count (int): The number of ping requests to send (default is 4).
+Returns:
+bool: Returns True if the ping was successful (i.e., the return code is 0), otherwise returns False.
+Functionality:
+Determine OS: The function checks the operating system to set the correct parameter for the ping command (-n for Windows, -c for Unix).
+Execute Command: It constructs the ping command and executes it using subprocess.run().
+Error Handling: Any exceptions during the execution are caught, and an error message is printed.
+
+Main Execution Flow
+
+Log File Initialization: The script creates or clears a log file named ping_results.txt to store the results of the ping operations.
+User Input: The script prompts the user to enter a list of IP addresses (default gateways) separated by commas. The input is processed to remove any leading or trailing whitespace.
+Ping Loop: The script iterates over each IP address from the user input:
+Calls the subnet_ping function for each IP.
+Prints whether the IP is online or offline based on the ping result.
+Appends the result to the ping_results.txt file.
+Completion Message: After processing all IP addresses, the script informs the user that the results have been saved to the log file.
+Example Usage
+To use the script, run it in a Python environment. When prompted, enter the IP addresses you wish to ping, separated by commas. For example:
+text
+Enter the default gateway IP address for each subnet you want to ping, separated by commas: 192.168.1.1, 192.168.1.254
+
+Output
+The output will be displayed in the console as follows:
+text
+192.168.1.1 is online
+192.168.1.254 is offline
+
+Additionally, the results will be saved in ping_results.txt in the same directory as the script.
+
+Error Handling
+The script includes basic error handling to manage exceptions that may arise during the ping operation. If an error occurs, a message is printed to the console, and the function returns False.
+
+Conclusion
+This script is a simple yet effective tool for network administrators or anyone needing to check the status of  a subnet network. By modifying the input, users can quickly assess the availability of multiple subnets with minimal effort.
